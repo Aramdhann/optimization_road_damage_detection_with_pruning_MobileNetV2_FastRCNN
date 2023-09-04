@@ -1,0 +1,651 @@
+G:\raditya\rcnnmobilenetv2\venv310\Scripts\python.exe G:\raditya\rcnnmobilenetv2\fine_tune_rcnn.py 
+[INFO] loading images...
+After Load
+[[1. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0.]
+ [1. 0. 0. 0. 0.]
+ ...
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 1. 0.]]
+WARNING:tensorflow:`input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
+2023-05-23 20:29:51.698008: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-05-23 20:29:53.489105: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1616] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 9601 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 3060, pci bus id: 0000:09:00.0, compute capability: 8.6
+[INFO] Running With Prunning...
+Model: "model"
+__________________________________________________________________________________________________
+ Layer (type)                   Output Shape         Param #     Connected to                     
+==================================================================================================
+ input_1 (InputLayer)           [(None, 224, 224, 3  0           []                               
+                                )]                                                                
+                                                                                                  
+ prune_low_magnitude_Conv1 (Pru  (None, 112, 112, 32  1730       ['input_1[0][0]']                
+ neLowMagnitude)                )                                                                 
+                                                                                                  
+ prune_low_magnitude_bn_Conv1 (  (None, 112, 112, 32  129        ['prune_low_magnitude_Conv1[0][0]
+ PruneLowMagnitude)             )                                ']                               
+                                                                                                  
+ prune_low_magnitude_Conv1_relu  (None, 112, 112, 32  1          ['prune_low_magnitude_bn_Conv1[0]
+  (PruneLowMagnitude)           )                                [0]']                            
+                                                                                                  
+ prune_low_magnitude_expanded_c  (None, 112, 112, 32  289        ['prune_low_magnitude_Conv1_relu[
+ onv_depthwise (PruneLowMagnitu  )                               0][0]']                          
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_expanded_c  (None, 112, 112, 32  129        ['prune_low_magnitude_expanded_co
+ onv_depthwise_BN (PruneLowMagn  )                               nv_depthwise[0][0]']             
+ itude)                                                                                           
+                                                                                                  
+ prune_low_magnitude_expanded_c  (None, 112, 112, 32  1          ['prune_low_magnitude_expanded_co
+ onv_depthwise_relu (PruneLowMa  )                               nv_depthwise_BN[0][0]']          
+ gnitude)                                                                                         
+                                                                                                  
+ prune_low_magnitude_expanded_c  (None, 112, 112, 16  1026       ['prune_low_magnitude_expanded_co
+ onv_project (PruneLowMagnitude  )                               nv_depthwise_relu[0][0]']        
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_expanded_c  (None, 112, 112, 16  65         ['prune_low_magnitude_expanded_co
+ onv_project_BN (PruneLowMagnit  )                               nv_project[0][0]']               
+ ude)                                                                                             
+                                                                                                  
+ prune_low_magnitude_block_1_ex  (None, 112, 112, 96  3074       ['prune_low_magnitude_expanded_co
+ pand (PruneLowMagnitude)       )                                nv_project_BN[0][0]']            
+                                                                                                  
+ prune_low_magnitude_block_1_ex  (None, 112, 112, 96  385        ['prune_low_magnitude_block_1_exp
+ pand_BN (PruneLowMagnitude)    )                                and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_1_ex  (None, 112, 112, 96  1          ['prune_low_magnitude_block_1_exp
+ pand_relu (PruneLowMagnitude)  )                                and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_1_pa  (None, 113, 113, 96  1          ['prune_low_magnitude_block_1_exp
+ d (PruneLowMagnitude)          )                                and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_1_de  (None, 56, 56, 96)  865         ['prune_low_magnitude_block_1_pad
+ pthwise (PruneLowMagnitude)                                     [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_1_de  (None, 56, 56, 96)  385         ['prune_low_magnitude_block_1_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_1_de  (None, 56, 56, 96)  1           ['prune_low_magnitude_block_1_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_1_pr  (None, 56, 56, 24)  4610        ['prune_low_magnitude_block_1_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_1_pr  (None, 56, 56, 24)  97          ['prune_low_magnitude_block_1_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_2_ex  (None, 56, 56, 144)  6914       ['prune_low_magnitude_block_1_pro
+ pand (PruneLowMagnitude)                                        ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_2_ex  (None, 56, 56, 144)  577        ['prune_low_magnitude_block_2_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_2_ex  (None, 56, 56, 144)  1          ['prune_low_magnitude_block_2_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_2_de  (None, 56, 56, 144)  1297       ['prune_low_magnitude_block_2_exp
+ pthwise (PruneLowMagnitude)                                     and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_2_de  (None, 56, 56, 144)  577        ['prune_low_magnitude_block_2_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_2_de  (None, 56, 56, 144)  1          ['prune_low_magnitude_block_2_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_2_pr  (None, 56, 56, 24)  6914        ['prune_low_magnitude_block_2_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_2_pr  (None, 56, 56, 24)  97          ['prune_low_magnitude_block_2_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_2_ad  (None, 56, 56, 24)  1           ['prune_low_magnitude_block_1_pro
+ d (PruneLowMagnitude)                                           ject_BN[0][0]',                  
+                                                                  'prune_low_magnitude_block_2_pro
+                                                                 ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_3_ex  (None, 56, 56, 144)  6914       ['prune_low_magnitude_block_2_add
+ pand (PruneLowMagnitude)                                        [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_3_ex  (None, 56, 56, 144)  577        ['prune_low_magnitude_block_3_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_3_ex  (None, 56, 56, 144)  1          ['prune_low_magnitude_block_3_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_3_pa  (None, 57, 57, 144)  1          ['prune_low_magnitude_block_3_exp
+ d (PruneLowMagnitude)                                           and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_3_de  (None, 28, 28, 144)  1297       ['prune_low_magnitude_block_3_pad
+ pthwise (PruneLowMagnitude)                                     [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_3_de  (None, 28, 28, 144)  577        ['prune_low_magnitude_block_3_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_3_de  (None, 28, 28, 144)  1          ['prune_low_magnitude_block_3_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_3_pr  (None, 28, 28, 32)  9218        ['prune_low_magnitude_block_3_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_3_pr  (None, 28, 28, 32)  129         ['prune_low_magnitude_block_3_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_4_ex  (None, 28, 28, 192)  12290      ['prune_low_magnitude_block_3_pro
+ pand (PruneLowMagnitude)                                        ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_4_ex  (None, 28, 28, 192)  769        ['prune_low_magnitude_block_4_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_4_ex  (None, 28, 28, 192)  1          ['prune_low_magnitude_block_4_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_4_de  (None, 28, 28, 192)  1729       ['prune_low_magnitude_block_4_exp
+ pthwise (PruneLowMagnitude)                                     and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_4_de  (None, 28, 28, 192)  769        ['prune_low_magnitude_block_4_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_4_de  (None, 28, 28, 192)  1          ['prune_low_magnitude_block_4_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_4_pr  (None, 28, 28, 32)  12290       ['prune_low_magnitude_block_4_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_4_pr  (None, 28, 28, 32)  129         ['prune_low_magnitude_block_4_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_4_ad  (None, 28, 28, 32)  1           ['prune_low_magnitude_block_3_pro
+ d (PruneLowMagnitude)                                           ject_BN[0][0]',                  
+                                                                  'prune_low_magnitude_block_4_pro
+                                                                 ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_5_ex  (None, 28, 28, 192)  12290      ['prune_low_magnitude_block_4_add
+ pand (PruneLowMagnitude)                                        [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_5_ex  (None, 28, 28, 192)  769        ['prune_low_magnitude_block_5_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_5_ex  (None, 28, 28, 192)  1          ['prune_low_magnitude_block_5_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_5_de  (None, 28, 28, 192)  1729       ['prune_low_magnitude_block_5_exp
+ pthwise (PruneLowMagnitude)                                     and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_5_de  (None, 28, 28, 192)  769        ['prune_low_magnitude_block_5_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_5_de  (None, 28, 28, 192)  1          ['prune_low_magnitude_block_5_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_5_pr  (None, 28, 28, 32)  12290       ['prune_low_magnitude_block_5_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_5_pr  (None, 28, 28, 32)  129         ['prune_low_magnitude_block_5_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_5_ad  (None, 28, 28, 32)  1           ['prune_low_magnitude_block_4_add
+ d (PruneLowMagnitude)                                           [0][0]',                         
+                                                                  'prune_low_magnitude_block_5_pro
+                                                                 ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_6_ex  (None, 28, 28, 192)  12290      ['prune_low_magnitude_block_5_add
+ pand (PruneLowMagnitude)                                        [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_6_ex  (None, 28, 28, 192)  769        ['prune_low_magnitude_block_6_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_6_ex  (None, 28, 28, 192)  1          ['prune_low_magnitude_block_6_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_6_pa  (None, 29, 29, 192)  1          ['prune_low_magnitude_block_6_exp
+ d (PruneLowMagnitude)                                           and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_6_de  (None, 14, 14, 192)  1729       ['prune_low_magnitude_block_6_pad
+ pthwise (PruneLowMagnitude)                                     [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_6_de  (None, 14, 14, 192)  769        ['prune_low_magnitude_block_6_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_6_de  (None, 14, 14, 192)  1          ['prune_low_magnitude_block_6_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_6_pr  (None, 14, 14, 64)  24578       ['prune_low_magnitude_block_6_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_6_pr  (None, 14, 14, 64)  257         ['prune_low_magnitude_block_6_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_7_ex  (None, 14, 14, 384)  49154      ['prune_low_magnitude_block_6_pro
+ pand (PruneLowMagnitude)                                        ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_7_ex  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_7_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_7_ex  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_7_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_7_de  (None, 14, 14, 384)  3457       ['prune_low_magnitude_block_7_exp
+ pthwise (PruneLowMagnitude)                                     and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_7_de  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_7_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_7_de  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_7_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_7_pr  (None, 14, 14, 64)  49154       ['prune_low_magnitude_block_7_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_7_pr  (None, 14, 14, 64)  257         ['prune_low_magnitude_block_7_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_7_ad  (None, 14, 14, 64)  1           ['prune_low_magnitude_block_6_pro
+ d (PruneLowMagnitude)                                           ject_BN[0][0]',                  
+                                                                  'prune_low_magnitude_block_7_pro
+                                                                 ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_8_ex  (None, 14, 14, 384)  49154      ['prune_low_magnitude_block_7_add
+ pand (PruneLowMagnitude)                                        [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_8_ex  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_8_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_8_ex  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_8_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_8_de  (None, 14, 14, 384)  3457       ['prune_low_magnitude_block_8_exp
+ pthwise (PruneLowMagnitude)                                     and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_8_de  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_8_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_8_de  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_8_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_8_pr  (None, 14, 14, 64)  49154       ['prune_low_magnitude_block_8_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_8_pr  (None, 14, 14, 64)  257         ['prune_low_magnitude_block_8_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_8_ad  (None, 14, 14, 64)  1           ['prune_low_magnitude_block_7_add
+ d (PruneLowMagnitude)                                           [0][0]',                         
+                                                                  'prune_low_magnitude_block_8_pro
+                                                                 ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_9_ex  (None, 14, 14, 384)  49154      ['prune_low_magnitude_block_8_add
+ pand (PruneLowMagnitude)                                        [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_9_ex  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_9_exp
+ pand_BN (PruneLowMagnitude)                                     and[0][0]']                      
+                                                                                                  
+ prune_low_magnitude_block_9_ex  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_9_exp
+ pand_relu (PruneLowMagnitude)                                   and_BN[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_9_de  (None, 14, 14, 384)  3457       ['prune_low_magnitude_block_9_exp
+ pthwise (PruneLowMagnitude)                                     and_relu[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_9_de  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_9_dep
+ pthwise_BN (PruneLowMagnitude)                                  thwise[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_block_9_de  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_9_dep
+ pthwise_relu (PruneLowMagnitud                                  thwise_BN[0][0]']                
+ e)                                                                                               
+                                                                                                  
+ prune_low_magnitude_block_9_pr  (None, 14, 14, 64)  49154       ['prune_low_magnitude_block_9_dep
+ oject (PruneLowMagnitude)                                       thwise_relu[0][0]']              
+                                                                                                  
+ prune_low_magnitude_block_9_pr  (None, 14, 14, 64)  257         ['prune_low_magnitude_block_9_pro
+ oject_BN (PruneLowMagnitude)                                    ject[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_9_ad  (None, 14, 14, 64)  1           ['prune_low_magnitude_block_8_add
+ d (PruneLowMagnitude)                                           [0][0]',                         
+                                                                  'prune_low_magnitude_block_9_pro
+                                                                 ject_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_10_e  (None, 14, 14, 384)  49154      ['prune_low_magnitude_block_9_add
+ xpand (PruneLowMagnitude)                                       [0][0]']                         
+                                                                                                  
+ prune_low_magnitude_block_10_e  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_10_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_10_e  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_10_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_10_d  (None, 14, 14, 384)  3457       ['prune_low_magnitude_block_10_ex
+ epthwise (PruneLowMagnitude)                                    pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_10_d  (None, 14, 14, 384)  1537       ['prune_low_magnitude_block_10_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_10_d  (None, 14, 14, 384)  1          ['prune_low_magnitude_block_10_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_10_p  (None, 14, 14, 96)  73730       ['prune_low_magnitude_block_10_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_10_p  (None, 14, 14, 96)  385         ['prune_low_magnitude_block_10_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_block_11_e  (None, 14, 14, 576)  110594     ['prune_low_magnitude_block_10_pr
+ xpand (PruneLowMagnitude)                                       oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_11_e  (None, 14, 14, 576)  2305       ['prune_low_magnitude_block_11_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_11_e  (None, 14, 14, 576)  1          ['prune_low_magnitude_block_11_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_11_d  (None, 14, 14, 576)  5185       ['prune_low_magnitude_block_11_ex
+ epthwise (PruneLowMagnitude)                                    pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_11_d  (None, 14, 14, 576)  2305       ['prune_low_magnitude_block_11_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_11_d  (None, 14, 14, 576)  1          ['prune_low_magnitude_block_11_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_11_p  (None, 14, 14, 96)  110594      ['prune_low_magnitude_block_11_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_11_p  (None, 14, 14, 96)  385         ['prune_low_magnitude_block_11_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_block_11_a  (None, 14, 14, 96)  1           ['prune_low_magnitude_block_10_pr
+ dd (PruneLowMagnitude)                                          oject_BN[0][0]',                 
+                                                                  'prune_low_magnitude_block_11_pr
+                                                                 oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_12_e  (None, 14, 14, 576)  110594     ['prune_low_magnitude_block_11_ad
+ xpand (PruneLowMagnitude)                                       d[0][0]']                        
+                                                                                                  
+ prune_low_magnitude_block_12_e  (None, 14, 14, 576)  2305       ['prune_low_magnitude_block_12_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_12_e  (None, 14, 14, 576)  1          ['prune_low_magnitude_block_12_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_12_d  (None, 14, 14, 576)  5185       ['prune_low_magnitude_block_12_ex
+ epthwise (PruneLowMagnitude)                                    pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_12_d  (None, 14, 14, 576)  2305       ['prune_low_magnitude_block_12_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_12_d  (None, 14, 14, 576)  1          ['prune_low_magnitude_block_12_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_12_p  (None, 14, 14, 96)  110594      ['prune_low_magnitude_block_12_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_12_p  (None, 14, 14, 96)  385         ['prune_low_magnitude_block_12_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_block_12_a  (None, 14, 14, 96)  1           ['prune_low_magnitude_block_11_ad
+ dd (PruneLowMagnitude)                                          d[0][0]',                        
+                                                                  'prune_low_magnitude_block_12_pr
+                                                                 oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_13_e  (None, 14, 14, 576)  110594     ['prune_low_magnitude_block_12_ad
+ xpand (PruneLowMagnitude)                                       d[0][0]']                        
+                                                                                                  
+ prune_low_magnitude_block_13_e  (None, 14, 14, 576)  2305       ['prune_low_magnitude_block_13_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_13_e  (None, 14, 14, 576)  1          ['prune_low_magnitude_block_13_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_13_p  (None, 15, 15, 576)  1          ['prune_low_magnitude_block_13_ex
+ ad (PruneLowMagnitude)                                          pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_13_d  (None, 7, 7, 576)   5185        ['prune_low_magnitude_block_13_pa
+ epthwise (PruneLowMagnitude)                                    d[0][0]']                        
+                                                                                                  
+ prune_low_magnitude_block_13_d  (None, 7, 7, 576)   2305        ['prune_low_magnitude_block_13_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_13_d  (None, 7, 7, 576)   1           ['prune_low_magnitude_block_13_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_13_p  (None, 7, 7, 160)   184322      ['prune_low_magnitude_block_13_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_13_p  (None, 7, 7, 160)   641         ['prune_low_magnitude_block_13_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_block_14_e  (None, 7, 7, 960)   307202      ['prune_low_magnitude_block_13_pr
+ xpand (PruneLowMagnitude)                                       oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_14_e  (None, 7, 7, 960)   3841        ['prune_low_magnitude_block_14_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_14_e  (None, 7, 7, 960)   1           ['prune_low_magnitude_block_14_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_14_d  (None, 7, 7, 960)   8641        ['prune_low_magnitude_block_14_ex
+ epthwise (PruneLowMagnitude)                                    pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_14_d  (None, 7, 7, 960)   3841        ['prune_low_magnitude_block_14_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_14_d  (None, 7, 7, 960)   1           ['prune_low_magnitude_block_14_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_14_p  (None, 7, 7, 160)   307202      ['prune_low_magnitude_block_14_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_14_p  (None, 7, 7, 160)   641         ['prune_low_magnitude_block_14_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_block_14_a  (None, 7, 7, 160)   1           ['prune_low_magnitude_block_13_pr
+ dd (PruneLowMagnitude)                                          oject_BN[0][0]',                 
+                                                                  'prune_low_magnitude_block_14_pr
+                                                                 oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_15_e  (None, 7, 7, 960)   307202      ['prune_low_magnitude_block_14_ad
+ xpand (PruneLowMagnitude)                                       d[0][0]']                        
+                                                                                                  
+ prune_low_magnitude_block_15_e  (None, 7, 7, 960)   3841        ['prune_low_magnitude_block_15_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_15_e  (None, 7, 7, 960)   1           ['prune_low_magnitude_block_15_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_15_d  (None, 7, 7, 960)   8641        ['prune_low_magnitude_block_15_ex
+ epthwise (PruneLowMagnitude)                                    pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_15_d  (None, 7, 7, 960)   3841        ['prune_low_magnitude_block_15_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_15_d  (None, 7, 7, 960)   1           ['prune_low_magnitude_block_15_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_15_p  (None, 7, 7, 160)   307202      ['prune_low_magnitude_block_15_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_15_p  (None, 7, 7, 160)   641         ['prune_low_magnitude_block_15_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_block_15_a  (None, 7, 7, 160)   1           ['prune_low_magnitude_block_14_ad
+ dd (PruneLowMagnitude)                                          d[0][0]',                        
+                                                                  'prune_low_magnitude_block_15_pr
+                                                                 oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_block_16_e  (None, 7, 7, 960)   307202      ['prune_low_magnitude_block_15_ad
+ xpand (PruneLowMagnitude)                                       d[0][0]']                        
+                                                                                                  
+ prune_low_magnitude_block_16_e  (None, 7, 7, 960)   3841        ['prune_low_magnitude_block_16_ex
+ xpand_BN (PruneLowMagnitude)                                    pand[0][0]']                     
+                                                                                                  
+ prune_low_magnitude_block_16_e  (None, 7, 7, 960)   1           ['prune_low_magnitude_block_16_ex
+ xpand_relu (PruneLowMagnitude)                                  pand_BN[0][0]']                  
+                                                                                                  
+ prune_low_magnitude_block_16_d  (None, 7, 7, 960)   8641        ['prune_low_magnitude_block_16_ex
+ epthwise (PruneLowMagnitude)                                    pand_relu[0][0]']                
+                                                                                                  
+ prune_low_magnitude_block_16_d  (None, 7, 7, 960)   3841        ['prune_low_magnitude_block_16_de
+ epthwise_BN (PruneLowMagnitude                                  pthwise[0][0]']                  
+ )                                                                                                
+                                                                                                  
+ prune_low_magnitude_block_16_d  (None, 7, 7, 960)   1           ['prune_low_magnitude_block_16_de
+ epthwise_relu (PruneLowMagnitu                                  pthwise_BN[0][0]']               
+ de)                                                                                              
+                                                                                                  
+ prune_low_magnitude_block_16_p  (None, 7, 7, 320)   614402      ['prune_low_magnitude_block_16_de
+ roject (PruneLowMagnitude)                                      pthwise_relu[0][0]']             
+                                                                                                  
+ prune_low_magnitude_block_16_p  (None, 7, 7, 320)   1281        ['prune_low_magnitude_block_16_pr
+ roject_BN (PruneLowMagnitude)                                   oject[0][0]']                    
+                                                                                                  
+ prune_low_magnitude_Conv_1 (Pr  (None, 7, 7, 1280)  819202      ['prune_low_magnitude_block_16_pr
+ uneLowMagnitude)                                                oject_BN[0][0]']                 
+                                                                                                  
+ prune_low_magnitude_Conv_1_bn   (None, 7, 7, 1280)  5121        ['prune_low_magnitude_Conv_1[0][0
+ (PruneLowMagnitude)                                             ]']                              
+                                                                                                  
+ prune_low_magnitude_out_relu (  (None, 7, 7, 1280)  1           ['prune_low_magnitude_Conv_1_bn[0
+ PruneLowMagnitude)                                              ][0]']                           
+                                                                                                  
+ prune_low_magnitude_average_po  (None, 1, 1, 1280)  1           ['prune_low_magnitude_out_relu[0]
+ oling2d (PruneLowMagnitude)                                     [0]']                            
+                                                                                                  
+ prune_low_magnitude_flatten (P  (None, 1280)        1           ['prune_low_magnitude_average_poo
+ runeLowMagnitude)                                               ling2d[0][0]']                   
+                                                                                                  
+ prune_low_magnitude_dense (Pru  (None, 128)         327810      ['prune_low_magnitude_flatten[0][
+ neLowMagnitude)                                                 0]']                             
+                                                                                                  
+ prune_low_magnitude_dropout (P  (None, 128)         1           ['prune_low_magnitude_dense[0][0]
+ runeLowMagnitude)                                               ']                               
+                                                                                                  
+ prune_low_magnitude_dense_1 (P  (None, 5)           1287        ['prune_low_magnitude_dropout[0][
+ runeLowMagnitude)                                               0]']                             
+                                                                                                  
+==================================================================================================
+Total params: 4,712,808
+Trainable params: 164,613
+Non-trainable params: 4,548,195
+__________________________________________________________________________________________________
+None
+[INFO] training head...
+Epoch 1/70
+2023-05-23 20:30:18.534209: I tensorflow/stream_executor/cuda/cuda_dnn.cc:384] Loaded cuDNN version 8100
+2023-05-23 20:30:20.731467: I tensorflow/stream_executor/cuda/cuda_blas.cc:1614] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+15/15 [==============================] - ETA: 0s - loss: 1.2504 - accuracy: 0.57902023-05-23 20:30:38.343166: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 1025396736 exceeds 10% of free system memory.
+15/15 [==============================] - 46s 2s/step - loss: 1.2504 - accuracy: 0.5790 - val_loss: 0.7174 - val_accuracy: 0.8109
+Epoch 2/70
+15/15 [==============================] - 21s 1s/step - loss: 0.6966 - accuracy: 0.8030 - val_loss: 0.4663 - val_accuracy: 0.8749
+Epoch 3/70
+15/15 [==============================] - 20s 1s/step - loss: 0.5177 - accuracy: 0.8544 - val_loss: 0.3610 - val_accuracy: 0.8949
+Epoch 4/70
+15/15 [==============================] - 21s 1s/step - loss: 0.4379 - accuracy: 0.8701 - val_loss: 0.3130 - val_accuracy: 0.9031
+Epoch 5/70
+15/15 [==============================] - 20s 1s/step - loss: 0.4086 - accuracy: 0.8764 - val_loss: 0.2854 - val_accuracy: 0.9125
+Epoch 6/70
+15/15 [==============================] - 21s 1s/step - loss: 0.3732 - accuracy: 0.8891 - val_loss: 0.2674 - val_accuracy: 0.9213
+Epoch 7/70
+15/15 [==============================] - 21s 1s/step - loss: 0.3714 - accuracy: 0.8904 - val_loss: 0.2958 - val_accuracy: 0.9166
+Epoch 8/70
+15/15 [==============================] - 21s 1s/step - loss: 0.3715 - accuracy: 0.8886 - val_loss: 0.2803 - val_accuracy: 0.9172
+Epoch 9/70
+15/15 [==============================] - 20s 1s/step - loss: 0.3258 - accuracy: 0.9004 - val_loss: 0.2692 - val_accuracy: 0.9225
+Epoch 10/70
+15/15 [==============================] - 21s 1s/step - loss: 0.3406 - accuracy: 0.8918 - val_loss: 0.2594 - val_accuracy: 0.9237
+Epoch 11/70
+15/15 [==============================] - 20s 1s/step - loss: 0.3201 - accuracy: 0.8974 - val_loss: 0.2502 - val_accuracy: 0.9260
+Epoch 12/70
+15/15 [==============================] - 21s 1s/step - loss: 0.3082 - accuracy: 0.9085 - val_loss: 0.2432 - val_accuracy: 0.9289
+Epoch 13/70
+15/15 [==============================] - 20s 1s/step - loss: 0.3124 - accuracy: 0.9063 - val_loss: 0.2412 - val_accuracy: 0.9248
+Epoch 14/70
+15/15 [==============================] - 21s 1s/step - loss: 0.3075 - accuracy: 0.9069 - val_loss: 0.2380 - val_accuracy: 0.9266
+Epoch 15/70
+15/15 [==============================] - 20s 1s/step - loss: 0.3007 - accuracy: 0.9120 - val_loss: 0.2365 - val_accuracy: 0.9254
+Epoch 16/70
+15/15 [==============================] - 21s 1s/step - loss: 0.2902 - accuracy: 0.9060 - val_loss: 0.2321 - val_accuracy: 0.9266
+Epoch 17/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2799 - accuracy: 0.9160 - val_loss: 0.2267 - val_accuracy: 0.9272
+Epoch 18/70
+15/15 [==============================] - 21s 1s/step - loss: 0.2740 - accuracy: 0.9131 - val_loss: 0.2240 - val_accuracy: 0.9266
+Epoch 19/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2694 - accuracy: 0.9166 - val_loss: 0.2194 - val_accuracy: 0.9272
+Epoch 20/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2744 - accuracy: 0.9133 - val_loss: 0.2237 - val_accuracy: 0.9307
+Epoch 21/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2809 - accuracy: 0.9114 - val_loss: 0.2164 - val_accuracy: 0.9307
+Epoch 22/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2616 - accuracy: 0.9201 - val_loss: 0.2126 - val_accuracy: 0.9295
+Epoch 23/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2671 - accuracy: 0.9157 - val_loss: 0.2078 - val_accuracy: 0.9301
+Epoch 24/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2636 - accuracy: 0.9152 - val_loss: 0.2038 - val_accuracy: 0.9284
+Epoch 25/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2564 - accuracy: 0.9184 - val_loss: 0.2048 - val_accuracy: 0.9295
+Epoch 26/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2468 - accuracy: 0.9190 - val_loss: 0.2029 - val_accuracy: 0.9325
+Epoch 27/70
+15/15 [==============================] - 21s 1s/step - loss: 0.2740 - accuracy: 0.9149 - val_loss: 0.2169 - val_accuracy: 0.9336
+Epoch 28/70
+15/15 [==============================] - 21s 1s/step - loss: 0.2742 - accuracy: 0.9125 - val_loss: 0.2108 - val_accuracy: 0.9348
+Epoch 29/70
+15/15 [==============================] - 20s 1s/step - loss: 0.2630 - accuracy: 0.9171 - val_loss: 0.2078 - val_accuracy: 0.9348
+[INFO] evaluating network...
+2023-05-23 20:40:18.197152: W tensorflow/core/framework/cpu_allocator_impl.cc:82] Allocation of 1025396736 exceeds 10% of free system memory.
+7/7 [==============================] - 2s 201ms/step
+G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\sklearn\metrics\_classification.py:1344: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+              precision    recall  f1-score   support
+
+          00       0.00      0.00      0.00         1
+         L00       0.71      0.15      0.25        33
+         R02       0.72      0.62      0.67       114
+         R03       0.91      0.95      0.93       488
+    no_label       0.97      0.98      0.98      1067
+
+    accuracy                           0.93      1703
+   macro avg       0.66      0.54      0.56      1703
+weighted avg       0.93      0.93      0.93      1703
+
+[INFO] saving mask detector model...
+WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+[INFO] saving label encoder...
+dict_keys(['loss', 'accuracy', 'val_loss', 'val_accuracy'])
+Traceback (most recent call last):
+  File "G:\raditya\rcnnmobilenetv2\fine_tune_rcnn.py", line 252, in <module>
+    plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
+  File "G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\matplotlib\pyplot.py", line 2812, in plot
+    return gca().plot(
+  File "G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\matplotlib\axes\_axes.py", line 1688, in plot
+    lines = [*self._get_lines(*args, data=data, **kwargs)]
+  File "G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\matplotlib\axes\_base.py", line 311, in __call__
+    yield from self._plot_args(
+  File "G:\raditya\rcnnmobilenetv2\venv310\lib\site-packages\matplotlib\axes\_base.py", line 504, in _plot_args
+    raise ValueError(f"x and y must have same first dimension, but "
+ValueError: x and y must have same first dimension, but have shapes (70,) and (29,)
+
+Process finished with exit code 1
